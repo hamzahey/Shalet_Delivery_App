@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shalet/screens/forms_data.dart';
 
 import 'main_page.dart';
 
@@ -42,7 +43,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   Container(
                     margin: EdgeInsets.only(top: 50),
                     child: Image.asset(
-                      "assets/logo.png",
+                      "assets/shalet.png",
                       height: 200,
                       width: 200,
                     ),
@@ -212,7 +213,7 @@ class _SignupScreenState extends State<SignupScreen> {
           GestureDetector(
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => MainPage()));
+                  context, MaterialPageRoute(builder: (context) => Forms()));
               // Write Click Listener Code Here.
             },
             child: Container(
