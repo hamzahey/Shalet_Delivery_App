@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "856321756581",
+    "project_id": "shalet-6fa69",
+    "storage_bucket": "shalet-6fa69.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856321756581:android:aed3826592590541b26c4c",
+        "android_client_info": {
+          "package_name": "com.example.shalet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856321756581-ut9ckfe8aqvioshcfcigvg1j5s00q4if.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1rhoD1-U5UjJ7WaZ-AwIWFT2N1c3TsgE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856321756581-ut9ckfe8aqvioshcfcigvg1j5s00q4if.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
