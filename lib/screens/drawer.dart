@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
@@ -14,6 +15,8 @@ class myDrawer extends StatefulWidget {
 }
 
 class _myDrawerState extends State<myDrawer> {
+  final _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -22,13 +25,16 @@ class _myDrawerState extends State<myDrawer> {
         children: [
           UserAccountsDrawerHeader(
             accountName: Text(
-              "Bilal A.",
+              "",
               style: TextStyle(color: Colors.black, fontSize: 20),
             ),
-            accountEmail: Text(
-              "bilal-amru@hotmail.com",
-              style: TextStyle(color: Colors.black),
-            ),
+            accountEmail: _auth.currentUser?.email != null
+                ? Text(
+                    "${_auth.currentUser?.email}",
+                    style: TextStyle(color: Colors.black, fontSize: 20),
+                  )
+                : Text("Guest",
+                    style: TextStyle(color: Colors.black, fontSize: 20)),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.black,
               child: Icon(

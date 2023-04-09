@@ -1,11 +1,14 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:shalet/Widgets/appbar.dart';
 import 'package:shalet/screens/help.dart';
+import 'package:shalet/screens/login.dart';
 
+import '../utils/utils.dart';
 import 'drawer.dart';
 
 class Dashboard extends StatefulWidget {
@@ -16,6 +19,21 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  final _auth = FirebaseAuth.instance;
+
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut().then((value) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoginScreen()));
+      });
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.toString());
+      // handle the error
+      Utils().toastMessage(e.code);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +60,14 @@ class _DashboardState extends State<Dashboard> {
               },
               icon: Icon(
                 Icons.help,
+                color: Colors.black,
+              )),
+          IconButton(
+              onPressed: () {
+                signOut();
+              },
+              icon: Icon(
+                Icons.logout_outlined,
                 color: Colors.black,
               ))
         ],
@@ -72,7 +98,16 @@ class _DashboardState extends State<Dashboard> {
                     color: Colors.black,
                     size: 50,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    if (_auth.currentUser?.email == null) {
+                      Utils()
+                          .toastMessage("Please Sign-In to avail the services");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                    } else {}
+                  },
                 ),
               ),
             ),
@@ -97,7 +132,16 @@ class _DashboardState extends State<Dashboard> {
                     color: Colors.black,
                     size: 50,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    if (_auth.currentUser?.email == null) {
+                      Utils()
+                          .toastMessage("Please Sign-In to avail the services");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                    } else {}
+                  },
                 ),
               ),
             ),
@@ -122,7 +166,16 @@ class _DashboardState extends State<Dashboard> {
                     color: Colors.black,
                     size: 50,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    if (_auth.currentUser?.email == null) {
+                      Utils()
+                          .toastMessage("Please Sign-In to avail the services");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                    } else {}
+                  },
                 ),
               ),
             ),
@@ -147,7 +200,16 @@ class _DashboardState extends State<Dashboard> {
                     color: Colors.black,
                     size: 50,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    if (_auth.currentUser?.email == null) {
+                      Utils()
+                          .toastMessage("Please Sign-In to avail the services");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                    } else {}
+                  },
                 ),
               ),
             ),
@@ -172,7 +234,16 @@ class _DashboardState extends State<Dashboard> {
                     color: Colors.black,
                     size: 50,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    if (_auth.currentUser?.email == null) {
+                      Utils()
+                          .toastMessage("Please Sign-In to avail the services");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                    } else {}
+                  },
                 ),
               ),
             ),

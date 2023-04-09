@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shalet/screens/exports.dart';
 import 'package:video_player/video_player.dart';
+import '../firebase_services/splash_services.dart';
 import 'login.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,11 +16,13 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   late VideoPlayerController _controller;
+  SplashServices splashScreen = SplashServices();
 
   @override
   void initState() {
     super.initState();
 
+    splashScreen.isLogin(context);
     _controller = VideoPlayerController.asset("assets/shalet.mp4")
       ..initialize().then((_) {
         setState(() {});
@@ -33,8 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
     _controller.play();
     await Future.delayed(const Duration(seconds: 5));
 
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoginScreen()));
+    
   }
 
   @override
