@@ -76,58 +76,157 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       child: Scaffold(
           body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 300,
-              decoration: BoxDecoration(
-                borderRadius:
-                    BorderRadius.only(bottomLeft: Radius.circular(90)),
-                color: new Color.fromRGBO(255, 216, 49, 1),
-                gradient: LinearGradient(
-                  colors: [
-                    (new Color.fromRGBO(255, 216, 49, 1)),
-                    new Color.fromRGBO(255, 216, 49, 1)
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 50),
-                      child: Image.asset(
-                        "assets/shalet.png",
-                        height: 200,
-                        width: 200,
-                      ),
+            child: Column(
+              children: [
+                Container(
+                  height: 300,
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.only(bottomLeft: Radius.circular(90)),
+                    color: new Color.fromRGBO(255, 216, 49, 1),
+                    gradient: LinearGradient(
+                      colors: [
+                        (new Color.fromRGBO(255, 216, 49, 1)),
+                        new Color.fromRGBO(255, 216, 49, 1)
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
                     ),
-                    Container(
-                      margin: EdgeInsets.only(right: 30),
-                      alignment: Alignment.bottomRight,
-                      child: Text(
-                        "Login",
-                        style: TextStyle(fontSize: 20, color: Colors.black),
-                      ),
-                    )
-                  ],
+                  ),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 50),
+                          child: Image.asset(
+                            "assets/shalet.png",
+                            height: 200,
+                            width: 200,
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(right: 30),
+                          alignment: Alignment.bottomRight,
+                          child: Text(
+                            "Login",
+                            style: TextStyle(fontSize: 20, color: Colors.black),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            Form(
-              key: _formkey,
-              child: Column(
-                children: [
-                  Container(
+                Form(
+                  key: _formkey,
+                  child: Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.only(left: 20, right: 20, top: 70),
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        height: 54,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: Colors.grey[200],
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(0, 10),
+                                blurRadius: 50,
+                                color: Color(0xffEEEEEE)),
+                          ],
+                        ),
+                        child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          controller: emailcontoller,
+                          cursorColor: Color.fromRGBO(255, 216, 49, 1),
+                          decoration: InputDecoration(
+                            icon: Icon(
+                              Icons.email,
+                              color: Color.fromRGBO(255, 216, 49, 1),
+                            ),
+                            hintText: "Enter Email",
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Enter Email';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        height: 54,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: Colors.grey[200],
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(0, 10),
+                                blurRadius: 50,
+                                color: Color(0xffEEEEEE)),
+                          ],
+                        ),
+                        child: TextFormField(
+                          keyboardType: TextInputType.text,
+                          controller: passwordcontoller,
+                          cursorColor: Color.fromRGBO(255, 216, 49, 1),
+                          decoration: InputDecoration(
+                            icon: Icon(
+                              Icons.vpn_key,
+                              color: Color.fromRGBO(255, 216, 49, 1),
+                            ),
+                            hintText: "Enter Password",
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Enter password';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                  alignment: Alignment.centerRight,
+                  child: GestureDetector(
+                    onTap: () {
+                      // Write Click Listener Code Here
+                    },
+                    child: Text("Forget Password?"),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    login();
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) => MainPage()));
+                    // Write Click Listener Code Here.
+                  },
+                  child: Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(left: 20, right: 20, top: 70),
                     padding: EdgeInsets.only(left: 20, right: 20),
                     height: 54,
                     decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          colors: [
+                            (new Color.fromRGBO(255, 216, 49, 1)),
+                            new Color.fromRGBO(255, 216, 49, 1)
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight),
                       borderRadius: BorderRadius.circular(50),
                       color: Colors.grey[200],
                       boxShadow: [
@@ -137,176 +236,78 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: Color(0xffEEEEEE)),
                       ],
                     ),
-                    child: TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      controller: emailcontoller,
-                      cursorColor: Color.fromRGBO(255, 216, 49, 1),
-                      decoration: InputDecoration(
-                        icon: Icon(
-                          Icons.email,
-                          color: Color.fromRGBO(255, 216, 49, 1),
-                        ),
-                        hintText: "Enter Email",
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter Email';
-                        }
-                        return null;
-                      },
-                    ),
+                    child: loading
+                        ? CircularProgressIndicator(
+                            strokeWidth: 3,
+                            color: Colors.black,
+                          )
+                        : Text(
+                            "LOGIN",
+                            style: TextStyle(color: Colors.black),
+                          ),
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-                    padding: EdgeInsets.only(left: 20, right: 20),
-                    height: 54,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.grey[200],
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(0, 10),
-                            blurRadius: 50,
-                            color: Color(0xffEEEEEE)),
-                      ],
-                    ),
-                    child: TextFormField(
-                      keyboardType: TextInputType.text,
-                      controller: passwordcontoller,
-                      cursorColor: Color.fromRGBO(255, 216, 49, 1),
-                      decoration: InputDecoration(
-                        icon: Icon(
-                          Icons.vpn_key,
-                          color: Color.fromRGBO(255, 216, 49, 1),
-                        ),
-                        hintText: "Enter Password",
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter password';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-              alignment: Alignment.centerRight,
-              child: GestureDetector(
-                onTap: () {
-                  // Write Click Listener Code Here
-                },
-                child: Text("Forget Password?"),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                login();
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => MainPage()));
-                // Write Click Listener Code Here.
-              },
-              child: Container(
-                alignment: Alignment.center,
-                margin: EdgeInsets.only(left: 20, right: 20, top: 70),
-                padding: EdgeInsets.only(left: 20, right: 20),
-                height: 54,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [
-                    (new Color.fromRGBO(255, 216, 49, 1)),
-                    new Color.fromRGBO(255, 216, 49, 1)
-                  ], begin: Alignment.centerLeft, end: Alignment.centerRight),
-                  borderRadius: BorderRadius.circular(50),
-                  color: Colors.grey[200],
-                  boxShadow: [
-                    BoxShadow(
-                        offset: Offset(0, 10),
-                        blurRadius: 50,
-                        color: Color(0xffEEEEEE)),
-                  ],
                 ),
-                child: loading
-                    ? CircularProgressIndicator(
-                        strokeWidth: 3,
-                        color: Colors.black,
-                      )
-                    : Text(
-                        "LOGIN",
-                        style: TextStyle(color: Colors.black),
+                Container(
+                  margin: EdgeInsets.only(top: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Don't Have Any Account?  "),
+                      GestureDetector(
+                        child: Text(
+                          "Register Now",
+                          style:
+                              TextStyle(color: Color.fromRGBO(255, 216, 49, 1)),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignupScreen()));
+                          // Write Tap Code Here.
+                        },
                       ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Don't Have Any Account?  "),
-                  GestureDetector(
-                    child: Text(
-                      "Register Now",
-                      style: TextStyle(color: Color.fromRGBO(255, 216, 49, 1)),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SignupScreen()));
-                      // Write Tap Code Here.
-                    },
-                  ),
-                ],
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                if (_auth.currentUser?.email == null) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Dashboard()));
-                } else {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MainPage()));
-                }
-              },
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.only(left: 300, right: 20, top: 30),
-                  padding: EdgeInsets.only(left: 20, right: 20),
-                  height: 44,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: [
-                      (new Color.fromRGBO(255, 216, 49, 1)),
-                      new Color.fromRGBO(255, 216, 49, 1)
-                    ], begin: Alignment.centerLeft, end: Alignment.centerRight),
-                    borderRadius: BorderRadius.circular(50),
-                    color: Colors.grey[200],
-                    boxShadow: [
-                      BoxShadow(
-                          offset: Offset(0, 10),
-                          blurRadius: 50,
-                          color: Color(0xffEEEEEE)),
                     ],
                   ),
-                  child: Text(
-                    "Skip",
-                    style: TextStyle(color: Colors.black),
-                  ),
                 ),
-              ),
-            )
-          ],
-        ),
-      )),
+                  
+              ],
+            ),
+          ),
+          bottomNavigationBar: Container(
+            child: ButtonBar(
+              alignment: MainAxisAlignment.center,
+              buttonMinWidth: 100,
+              children: [
+                SizedBox(
+                  height: 40,
+                  width: 120,
+                  child: TextButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color.fromRGBO(255, 216, 49, 1)),
+                      ),
+                      onPressed: () {
+                        if (_auth.currentUser?.email == null) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Dashboard()));
+                        } else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MainPage()));
+                        }
+                      },
+                      child: Text(
+                        "Skip",
+                        style: TextStyle(color: Colors.black),
+                      )),
+                ),
+              ],
+            ),
+          )),
     );
   }
 }
