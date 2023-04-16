@@ -24,8 +24,6 @@ class _LocationState extends State<Location> {
   final user;
   _LocationState({required this.user});
 
-  final ref = FirebaseDatabase.instance.ref("Data");
-
   void dispose() {
     // TODO: implement dispose
     super.dispose();
@@ -46,6 +44,7 @@ class _LocationState extends State<Location> {
 
   @override
   Widget build(BuildContext context) {
+    final ref = FirebaseDatabase.instance.ref(user.toString());
     return Scaffold(
       body: SingleChildScrollView(
         child: Expanded(
@@ -155,10 +154,17 @@ class _LocationState extends State<Location> {
                           if (pickUp.text == "" && dropOff.text == "") {
                             Utils().toastMessage("Please Enter the location");
                           } else {
-                            ref.child(user.toString()).child("Location").set({
-                              'pickup': pickUp.text.toString(),
-                              'dropoff': dropOff.text.toString()
-                            });
+                            ref
+                                .child("Store")
+                                .child("location")
+                                .set({
+                                  'pickup': pickUp.text.toString(),
+                                  'dropoff': dropOff.text.toString()
+                                })
+                                .then((value) =>
+                                    Utils().toastMessage("Location Added"))
+                                .onError((error, stackTrace) =>
+                                    Utils().toastMessage(error.toString()));
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

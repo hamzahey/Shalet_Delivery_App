@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:shalet/screens/item_details.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -19,6 +21,7 @@ class _Add_ItemsState extends State<Add_Items> {
 
   @override
   Widget build(BuildContext context) {
+    final ref = FirebaseDatabase.instance.ref(user.toString());
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
@@ -43,11 +46,12 @@ class _Add_ItemsState extends State<Add_Items> {
         ),
         backgroundColor: Colors.black,
       ),
-      body: Center(
-        child: Text(
-          "Add Items to Your Dolly",
-          style: TextStyle(color: Colors.black, fontSize: 20),
-        ),
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(margin: EdgeInsets.all(5), child: Text("data")),
+          )
+        ],
       ),
       bottomNavigationBar: Container(
         child: ButtonBar(
@@ -80,7 +84,9 @@ class _Add_ItemsState extends State<Add_Items> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Item_details(user: user,)));
+                            builder: (context) => Item_details(
+                                  user: user,
+                                )));
                   },
                   child: Text(
                     "Next",
