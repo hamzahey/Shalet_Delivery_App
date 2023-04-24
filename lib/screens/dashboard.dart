@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:shalet/Widgets/appbar.dart';
 import 'package:shalet/screens/help.dart';
+import 'package:shalet/screens/item_details.dart';
 import 'package:shalet/screens/location.dart';
 import 'package:shalet/screens/login.dart';
 
@@ -38,6 +39,7 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    final id = DateTime.now().millisecond.toString();
     return WillPopScope(
       onWillPop: () async {
         SystemNavigator.pop();
@@ -117,8 +119,9 @@ class _DashboardState extends State<Dashboard> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Location(
+                                builder: (context) => Item_details(
                                       user: _auth.currentUser?.uid,
+                                      id: id,
                                     )));
                         debugPrint(_auth.currentUser?.uid);
                       }

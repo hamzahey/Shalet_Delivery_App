@@ -1,20 +1,32 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:shalet/screens/add_item.dart';
 import 'package:shalet/screens/helpers.dart';
 import 'package:shalet/utils/utils.dart';
 
 class Item_details extends StatefulWidget {
+  final id;
   final user;
-  const Item_details({super.key, required this.user});
+
+  const Item_details({
+    super.key,
+    required this.user,
+    required this.id,
+  });
 
   @override
-  State<Item_details> createState() => _Item_detailsState(user: user);
+  State<Item_details> createState() => _Item_detailsState(user: user, id: id);
 }
 
 class _Item_detailsState extends State<Item_details> {
+  final id;
   final user;
-  _Item_detailsState({required this.user});
+
+  _Item_detailsState({
+    required this.user,
+    required this.id,
+  });
 
   final item = TextEditingController();
 
@@ -38,6 +50,34 @@ class _Item_detailsState extends State<Item_details> {
   void dispose() {
     super.dispose();
     item.dispose();
+  }
+
+  List list1 = [];
+
+  void update() {
+    setState(() {
+      list1.toSet().toList();
+    });
+    print(list1);
+  }
+
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final ref2 = FirebaseDatabase.instance.ref(user.toString()).child(id);
+    ref2.onValue.listen((event) {
+      final data = event.snapshot.value as Map<dynamic, dynamic>?;
+      if (data != null) {
+        // Use the forEach() method to iterate over the child2 node's values
+        data.forEach((key, value) {
+          if (value["value"] != null) {
+            print('Key: $key, Value: ${value["value"]}');
+            list1.add(value["value"].toString());
+            print(list1);
+          }
+        });
+      }
+    });
   }
 
   @override
@@ -255,99 +295,163 @@ class _Item_detailsState extends State<Item_details> {
                           MaterialStateProperty.all<Color>(Colors.black),
                     ),
                     onPressed: () {
+                      ref
+                          .child(id)
+                          .child("Shalet")
+                          .set({'type': 'Store'})
+                          .then((value) {})
+                          .onError((error, stackTrace) {
+                            Utils().toastMessage(error.toString());
+                          });
+
                       if (_n != 0 && list != "") {
                         if (list == "couch") {
-                          ref.child("Store").child('couch').set(
+                          ref.child(id).child('couch').set(
                               {'value': "Couch", "count": _n}).then((value) {
-                            Utils().toastMessage("Chair Added");
-                            Navigator.pop(context);
+                            update();
+
+                            Utils().toastMessage("Couch Added");
+
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Add_Items(
+                                          user: user,
+                                          id: id,
+                                          list: list1,
+                                        )));
                           }).onError((error, stackTrace) {
                             Utils().toastMessage(error.toString());
                           });
                         } else if (list == "box") {
                           ref
-                              .child("Store")
-                              .child('Box')
+                              .child(id)
+                              .child('box')
                               .set({'value': "Box", "count": _n}).then((value) {
+                            update();
                             Utils().toastMessage("Box Added");
-                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Add_Items(
+                                        user: user, id: id, list: list1)));
                           }).onError((error, stackTrace) {
                             Utils().toastMessage(error.toString());
                           });
                         } else if (list == "desk") {
-                          ref.child("Store").child('Desk').set(
+                          ref.child(id).child('desk').set(
                               {'value': "Desk", "count": _n}).then((value) {
+                            update();
                             Utils().toastMessage("Desk Added");
-                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Add_Items(
+                                        user: user, id: id, list: list1)));
                           }).onError((error, stackTrace) {
                             Utils().toastMessage(error.toString());
                           });
                         } else if (list == "dinning") {
-                          ref.child("Store").child('Dinning').set({
+                          ref.child(id).child('dinning').set({
                             'value': "Dinning Table",
                             "count": _n
                           }).then((value) {
+                            update();
                             Utils().toastMessage("Dinning Table Added");
-                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Add_Items(
+                                        user: user, id: id, list: list1)));
                           }).onError((error, stackTrace) {
                             Utils().toastMessage(error.toString());
                           });
                         } else if (list == "tv") {
                           ref
-                              .child("Store")
-                              .child('TV')
+                              .child(id)
+                              .child('tv')
                               .set({'value': "TV", "count": _n}).then((value) {
+                            update();
                             Utils().toastMessage("TV Added");
-                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Add_Items(
+                                        user: user, id: id, list: list1)));
                           }).onError((error, stackTrace) {
                             Utils().toastMessage(error.toString());
                           });
                         } else if (list == "mattress") {
-                          ref.child("Store").child('mattress').set(
+                          ref.child(id).child('mattress').set(
                               {'value': "Mattress", "count": _n}).then((value) {
+                            update();
                             Utils().toastMessage("Mattress Added");
-                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Add_Items(
+                                        user: user, id: id, list: list1)));
                           }).onError((error, stackTrace) {
                             Utils().toastMessage(error.toString());
                           });
                         } else if (list == "file cabinet") {
                           ref
-                              .child("Store")
+                              .child(id)
                               .child('file cabinet')
                               .set({'value': "File Cabinet", "count": _n}).then(
                                   (value) {
+                            update();
                             Utils().toastMessage("File Cabinet Added");
-                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Add_Items(
+                                        user: user, id: id, list: list1)));
                           }).onError((error, stackTrace) {
                             Utils().toastMessage(error.toString());
                           });
                         } else if (list == "chair") {
-                          ref.child("Store").child('chair').set(
+                          ref.child(id).child('chair').set(
                               {'value': "Chair", "count": _n}).then((value) {
+                            update();
                             Utils().toastMessage("Chair Added");
-                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Add_Items(
+                                        user: user, id: id, list: list1)));
                           }).onError((error, stackTrace) {
                             Utils().toastMessage(error.toString());
                           });
                         } else if (list == "bed frame") {
                           ref
-                              .child("Store")
+                              .child(id)
                               .child('bed frame')
                               .set({'value': "Bed Frame", "count": _n}).then(
                                   (value) {
+                            update();
                             Utils().toastMessage("Bed Frame Added");
-                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Add_Items(
+                                        user: user, id: id, list: list1)));
                           }).onError((error, stackTrace) {
                             Utils().toastMessage(error.toString());
                           });
                         } else if (list == "kitchen") {
                           ref
-                              .child("Store")
+                              .child(id)
                               .child('kitchen')
                               .set({'value': "Refrigenator", "count": _n}).then(
                                   (value) {
+                            update();
                             Utils().toastMessage("Refrigenator Added");
-                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Add_Items(
+                                        user: user, id: id, list: list1)));
                           }).onError((error, stackTrace) {
                             Utils().toastMessage(error.toString());
                           });

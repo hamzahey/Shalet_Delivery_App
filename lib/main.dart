@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:shalet/screens/exports.dart';
 import 'package:shalet/screens/login.dart';
 
-
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -23,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Color.fromRGBO(255, 216, 49, 1),
       ),
       home: const SplashScreen(),
     );

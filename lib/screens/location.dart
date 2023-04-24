@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shalet/main.dart';
 import 'package:shalet/screens/add_item.dart';
+import 'package:shalet/screens/item_details.dart';
 import 'package:shalet/utils/utils.dart';
 
 class Location extends StatefulWidget {
@@ -44,7 +45,8 @@ class _LocationState extends State<Location> {
 
   @override
   Widget build(BuildContext context) {
-    final ref = FirebaseDatabase.instance.ref(user.toString());
+    final id = DateTime.now().millisecond.toString();
+    final ref = FirebaseDatabase.instance.ref(user);
     return Scaffold(
       body: SingleChildScrollView(
         child: Expanded(
@@ -155,8 +157,8 @@ class _LocationState extends State<Location> {
                             Utils().toastMessage("Please Enter the location");
                           } else {
                             ref
-                                .child("Store")
-                                .child("location")
+                                .child(id)
+                                .child('Location')
                                 .set({
                                   'pickup': pickUp.text.toString(),
                                   'dropoff': dropOff.text.toString()
@@ -168,8 +170,9 @@ class _LocationState extends State<Location> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Add_Items(
+                                    builder: (context) => Item_details(
                                           user: user,
+                                          id: id,
                                         )));
                           }
                         },
