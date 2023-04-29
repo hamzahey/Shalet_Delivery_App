@@ -6,27 +6,24 @@ import 'package:shalet/screens/helpers.dart';
 import 'package:shalet/utils/utils.dart';
 
 class Item_details extends StatefulWidget {
+  final type;
   final id;
   final user;
 
-  const Item_details({
-    super.key,
-    required this.user,
-    required this.id,
-  });
+  const Item_details(
+      {super.key, required this.user, required this.id, required this.type});
 
   @override
-  State<Item_details> createState() => _Item_detailsState(user: user, id: id);
+  State<Item_details> createState() =>
+      _Item_detailsState(user: user, id: id, type: this.type);
 }
 
 class _Item_detailsState extends State<Item_details> {
   final id;
   final user;
+  final type;
 
-  _Item_detailsState({
-    required this.user,
-    required this.id,
-  });
+  _Item_detailsState({required this.user, required this.id, this.type});
 
   final item = TextEditingController();
 
@@ -298,7 +295,7 @@ class _Item_detailsState extends State<Item_details> {
                       ref
                           .child(id)
                           .child("Shalet")
-                          .set({'type': 'Store'})
+                          .set({'type': type.toString()})
                           .then((value) {})
                           .onError((error, stackTrace) {
                             Utils().toastMessage(error.toString());

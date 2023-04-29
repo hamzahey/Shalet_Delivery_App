@@ -11,6 +11,7 @@ import 'package:shalet/screens/item_details.dart';
 import 'package:shalet/screens/location.dart';
 import 'package:shalet/screens/login.dart';
 
+
 import '../utils/utils.dart';
 import 'drawer.dart';
 
@@ -119,11 +120,10 @@ class _DashboardState extends State<Dashboard> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Item_details(
+                                builder: (context) => Location(
                                       user: _auth.currentUser?.uid,
-                                      id: id,
+                                      type: 'Store Delivery',
                                     )));
-                        debugPrint(_auth.currentUser?.uid);
                       }
                     },
                   ),
@@ -158,7 +158,15 @@ class _DashboardState extends State<Dashboard> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => LoginScreen()));
-                      } else {}
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Location(
+                                      user: _auth.currentUser?.uid,
+                                      type: 'Move a Few Items',
+                                    )));
+                      }
                     },
                   ),
                 ),
@@ -192,7 +200,15 @@ class _DashboardState extends State<Dashboard> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => LoginScreen()));
-                      } else {}
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Location(
+                                      user: _auth.currentUser?.uid,
+                                      type: 'Move an Apartment',
+                                    )));
+                      }
                     },
                   ),
                 ),
@@ -226,7 +242,15 @@ class _DashboardState extends State<Dashboard> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => LoginScreen()));
-                      } else {}
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Location(
+                                      user: _auth.currentUser?.uid,
+                                      type: 'Muscle Only',
+                                    )));
+                      }
                     },
                   ),
                 ),
@@ -260,7 +284,15 @@ class _DashboardState extends State<Dashboard> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => LoginScreen()));
-                      } else {}
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Location(
+                                      user: _auth.currentUser?.uid,
+                                      type: 'Truck Only',
+                                    )));
+                      }
                     },
                   ),
                 ),
